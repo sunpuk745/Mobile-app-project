@@ -4,6 +4,7 @@ import 'package:google_fonts/google_fonts.dart';
 
 // ignore: unnecessary_import
 import 'package:flutter/cupertino.dart';
+import 'package:mobile_app_project/app_screen/spinwheel2.dart';
 
 class ListViewFood extends StatefulWidget {
   const ListViewFood({super.key});
@@ -14,7 +15,8 @@ class ListViewFood extends StatefulWidget {
 }
 
 class _ListViewFoodState extends State<ListViewFood> {
-  static final List<String> entries = [];
+
+  final List<String> entries = [];
   final textController = TextEditingController();
 
   @override
@@ -131,7 +133,13 @@ class _ListViewFoodState extends State<ListViewFood> {
           height: 60,
           child: MaterialButton(
             onPressed: () {
-              //TODO: route to spinning wheel
+              if (entries.isNotEmpty) {
+                Navigator.of(context).push(MaterialPageRoute(
+                    builder: (context) => SpinWheel2(value: entries)));
+              }
+              else {
+                //Do nothing //TODO: Can implement something later
+              }
             },
             // ignore: unnecessary_new
             shape: new RoundedRectangleBorder(

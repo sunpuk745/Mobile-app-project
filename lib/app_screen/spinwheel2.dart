@@ -2,25 +2,25 @@ import 'dart:async';
 import 'dart:math';
 
 import 'package:flutter/material.dart';
-import 'ginraidee.dart';
 import 'package:flutter_fortune_wheel/flutter_fortune_wheel.dart';
 
 class SpinWheel2 extends StatefulWidget {
-const SpinWheel2({Key? key}) : super(key: key);
 
-@override
-State<SpinWheel2> createState() => _SpinWheel2State();
+  List value;
+  SpinWheel2({Key ?key, required this.value}) : super(key: key);
+
+  @override
+  State<SpinWheel2> createState() => _SpinWheel2State(value);
 }
 
 class _SpinWheel2State extends State<SpinWheel2> {
   StreamController<int> selected = StreamController.broadcast();
 
+  List value;
+  _SpinWheel2State(this.value);
+
   final _random = Random();
   var result = '';
-
-  final item = <String>[
-    "ขาหมู", "กระเพา", "ก๋วยเตี๋ยว", "ผัดไทย"
-  ];
 
   @override
   void dispose() {
@@ -35,37 +35,54 @@ class _SpinWheel2State extends State<SpinWheel2> {
           crossAxisAlignment: CrossAxisAlignment.center,
           mainAxisAlignment: MainAxisAlignment.center,
           children: [
+            StreamBuilder(
+            stream: selected.stream,
+            builder: (context, snapshot) => snapshot.hasData
+                ? _text(snapshot)
+                : Container(),
+            ),
             SizedBox(
               height: 300,
               child: FortuneWheel(
+                selected: selected.stream,
                 animateFirst: false,
                 physics: CircularPanPhysics(
-                  duration: Duration(seconds: 2),
-                  curve: Curves.bounceInOut,
+                  duration: Duration(seconds: 1),
+                  curve: Curves.decelerate,
                 ),
+                  onFling: () {
+                    selected.add(Fortune.randomInt(0, value.length));
+                  },
+                onAnimationStart: () {
+                },
                 items: [
-                  for (var items in item)
+                  for (int i = 0; i < value.length; i++)...<FortuneItem>{
                     FortuneItem(
-                        child: Text(items,
+                        child: Text(value[i],
                             style: const TextStyle(
                                 fontSize: 25,
                                 fontWeight: FontWeight.bold)),
                         style: FortuneItemStyle(
-                          color: Colors.primaries[_random.nextInt(Colors.primaries.length)],// <-- Wheel color
+                          color: Colors.primaries[_random.nextInt(Colors.primaries.length)], // <-- Wheel color
                           borderColor: Colors.white, // <-- Wheel border color
                           borderWidth: 3, // <-- Wheel border width
                         )
                     )
+                  }
                 ],
                 onAnimationEnd: () {
-                  StreamBuilder(
-                    stream: selected.stream,
-                    builder: (context, snapshot) => snapshot.hasData
-                        ? _text(snapshot)
-                        : Container(),
+                  setState(() {
+                    StreamBuilder(
+                      stream: selected.stream,
+                      builder: (context, snapshot) => snapshot.hasData
+                          ? _text(snapshot)
+                          : Container(),
+                    );
+                  });
+                  ScaffoldMessenger.of(context).showSnackBar(
+                    SnackBar(content: Text('วันนี้เราจะไปกิน!!! ${result}'))
                   );
                 },
-                selected: selected.stream,
                 indicators: const <FortuneIndicator>[
                   FortuneIndicator(
                       alignment: Alignment.topCenter, // <-- Pointer location
@@ -79,7 +96,7 @@ class _SpinWheel2State extends State<SpinWheel2> {
             GestureDetector(
               onTap: () {
                 setState(() {
-                  selected.add(Fortune.randomInt(0, item.length));
+                  selected.add(Fortune.randomInt(0, value.length));
                 });
               },
               child: Container(
@@ -105,8 +122,8 @@ class _SpinWheel2State extends State<SpinWheel2> {
 
   Widget _text(var snapshot) {
     int val = snapshot.data;
-    print(item[val]);
+    result = value[val];
 
-    return Text(item[val].toString());
+    return SizedBox();
   }
 }

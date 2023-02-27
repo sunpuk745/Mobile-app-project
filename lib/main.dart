@@ -2,6 +2,7 @@ import 'package:flutter/material.dart';
 import 'app_screen/home_page.dart';
 import 'app_screen/ginraidee.dart';
 import 'app_screen/food_recommend.dart';
+import 'app_screen/spinwheel2.dart';
 
 void main() {
   runApp(const MyApp());

@@ -16,7 +16,7 @@ class HomePage extends StatelessWidget {
               mainAxisAlignment: MainAxisAlignment.center,
               // ignore: prefer_const_literals_to_create_immutables
               children: [
-                const Padding(padding: EdgeInsets.only(top: 100)),
+                const Padding(padding: EdgeInsets.only(top: 80)),
                 Expanded(
                   child: Text(
                     'เรื่องกิน เรื่องใหญ่',
