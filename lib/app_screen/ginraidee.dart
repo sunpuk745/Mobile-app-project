@@ -15,7 +15,6 @@ class ListViewFood extends StatefulWidget {
 }
 
 class _ListViewFoodState extends State<ListViewFood> {
-
   final List<String> entries = [];
   final textController = TextEditingController();
 
@@ -43,16 +42,16 @@ class _ListViewFoodState extends State<ListViewFood> {
               BoxShadow(
                   color: Colors.black38, blurRadius: 5, offset: Offset(0, 5))
             ],
-            color: Colors.greenAccent[100],
+            color: Colors.white,
             borderRadius: BorderRadius.circular(30.0),
           ),
           child: Center(
             child: TextField(
               controller: textController,
-              style: const TextStyle(fontSize: 30),
+              style: const TextStyle(fontSize: 25),
               textAlign: TextAlign.center,
               decoration: InputDecoration(
-                  hintText: 'กินอะไรดี',
+                  hintText: 'พิมพ์ชื่ออาหาร',
                   hintStyle: GoogleFonts.prompt(),
                   border: InputBorder.none,
                   suffixIcon: IconButton(
@@ -72,7 +71,7 @@ class _ListViewFoodState extends State<ListViewFood> {
           ),
         ),
         Text(
-          'ปล. โปรดเพิ่มราบการอย่างน้อย 2 รายการ',
+          'ปล. โปรดเพิ่มรายการอย่างน้อย 2 รายการ',
           style:
               GoogleFonts.prompt(fontWeight: FontWeight.bold, fontSize: 20.0),
         ),
@@ -82,15 +81,10 @@ class _ListViewFoodState extends State<ListViewFood> {
               right: 30.0,
             ),
             height: 200.0,
-            decoration: BoxDecoration(
-                boxShadow: const [
-                  BoxShadow(
-                      color: Colors.black38,
-                      blurRadius: 5,
-                      offset: Offset(0, 5))
-                ],
-                borderRadius: BorderRadius.circular(30.0),
-                color: Colors.greenAccent[100]),
+            decoration: BoxDecoration(boxShadow: const [
+              BoxShadow(
+                  color: Colors.black38, blurRadius: 5, offset: Offset(0, 5))
+            ], borderRadius: BorderRadius.circular(30.0), color: Colors.white),
             child: entries.isNotEmpty
                 ? Scrollbar(
                     child: ListView.separated(
@@ -128,27 +122,27 @@ class _ListViewFoodState extends State<ListViewFood> {
                           fontSize: 30, color: Colors.black26),
                     ),
                   )),
-        SizedBox(
-          width: 300,
-          height: 60,
-          child: MaterialButton(
-            onPressed: () {
-              if (entries.isNotEmpty) {
-                Navigator.of(context).push(MaterialPageRoute(
-                    builder: (context) => SpinWheel2(value: entries)));
-              }
-              else {
-                //Do nothing //TODO: Can implement something later
-              }
-            },
-            // ignore: unnecessary_new
-            shape: new RoundedRectangleBorder(
-                // ignore: unnecessary_new
-                borderRadius: new BorderRadius.circular(30.0)),
-            color: Colors.green,
-            child: Text(
-              'วันนี้จะกิน...(กดสุ่ม)',
-              style: GoogleFonts.prompt(fontSize: 25.0, color: Colors.white),
+        Visibility(
+          visible: entries.length >= 2,
+          child: SizedBox(
+            width: 300,
+            height: 60,
+            child: MaterialButton(
+              onPressed: () {
+                if (entries.isNotEmpty) {
+                  Navigator.of(context).push(MaterialPageRoute(
+                      builder: (context) => SpinWheel2(value: entries)));
+                } else {
+                  //Do nothing //TODO: Can implement something later
+                }
+              },
+              shape: RoundedRectangleBorder(
+                  borderRadius: BorderRadius.circular(30.0)),
+              color: Colors.green,
+              child: Text(
+                'วันนี้จะกิน...(กดสุ่ม)',
+                style: GoogleFonts.prompt(fontSize: 25.0, color: Colors.white),
+              ),
             ),
           ),
         ),
