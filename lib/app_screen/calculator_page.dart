@@ -14,6 +14,14 @@ class _Calculator extends State<Calculator> {
   String num = '';
   int _total_cost = 0;
   int _divided_cost = 0;
+  final List<TextEditingController> _controllers = [];
+
+  void _initializeControllers() {
+    _controllers.clear();
+    for (int i = 0; i < _people_num; i++) {
+      _controllers.add(TextEditingController());
+    }
+  }
 
   void _convertStringtoInt() {
     if (_controller.text.isNotEmpty) {
@@ -28,6 +36,7 @@ class _Calculator extends State<Calculator> {
   void _incrementPeople() {
     setState(() {
       _people_num++;
+      _initializeControllers();
     });
   }
 
@@ -39,6 +48,7 @@ class _Calculator extends State<Calculator> {
       else {
         _people_num--;
       }
+      _initializeControllers();
     });
   }
 
@@ -56,6 +66,50 @@ class _Calculator extends State<Calculator> {
       }
     });
   }
+
+  void _showDialog() {
+    showDialog(
+      context: context,
+      builder: (context) => AlertDialog(
+        title: Text('ใครมากินบ้าง?'),
+        content: SingleChildScrollView(
+          child: Column(
+            mainAxisSize: MainAxisSize.min,
+            children: [
+              for (int i = 0; i < _people_num; i++)
+                TextField(
+                  controller: _controllers[i],
+                  decoration: InputDecoration(labelText: 'คนที่ ${i + 1}'),
+                ),
+            ],
+          ),
+        ),
+        actions: [
+          TextButton(
+            onPressed: () {
+              Navigator.of(context).pop();
+            },
+            child: Text('ยกเลิก'),
+          ),
+          ElevatedButton(
+            onPressed: () {
+              List<String> inputValues = [];
+              for (int i = 0; i < _people_num; i++) {
+                inputValues.add(_controllers[i].text);
+              }
+              Navigator.of(context).pop(inputValues);
+              Navigator.of(context).push(
+                  MaterialPageRoute(
+                      builder: (context) => CheckBill(total_cost: _total_cost, people_num: _people_num, divided_cost: _divided_cost, people_names: inputValues))
+              );
+            },
+            child: Text('ยืนยัน'),
+          ),
+        ],
+      ),
+    );
+  }
+
 
   @override
   Widget build(BuildContext context) {
@@ -238,14 +292,9 @@ class _Calculator extends State<Calculator> {
                 onPressed: () {
                   _convertStringtoInt();
                   _divideCost();
-                  Navigator.of(context).push(
-                      MaterialPageRoute(
-                          builder: (context) => CheckBill(total_cost: _total_cost, people_num: _people_num, divided_cost: _divided_cost,))
-                  );
+                  _showDialog();
                 },
-                // ignore: unnecessary_new
                 shape: new RoundedRectangleBorder(
-                  // ignore: unnecessary_new
                     borderRadius: new BorderRadius.circular(30.0)),
                 color: Colors.green,
                 child: Text(
@@ -285,7 +334,7 @@ class NumpadBtn extends StatelessWidget {
               width: borderWidth
           ),
         ),
-        child: Text(text, style: TextStyle(fontSize: fontSize),),
+        child: Text(text, style: TextStyle(fontSize: fontSize)),
       ),
     );
   }
