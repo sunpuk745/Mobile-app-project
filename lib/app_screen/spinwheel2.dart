@@ -23,19 +23,49 @@ class _SpinWheel2State extends State<SpinWheel2> {
   final _random = Random();
   var result = '';
 
+  //original color
+  Color background_color = Colors.white;
+  Color title_color = Colors.black;
+
+  Color spinwheel_border_color = Colors.white;
+  Color odd_spinwheel_color = Colors.green;
+  Color even_spinwheel_color = Colors.greenAccent;
+  Color special_spinwheel_color = Colors.black54;
+
+  Color back_button_color = Colors.redAccent;
+  Color spin_button_color = Colors.green;
+
   //test color
-  Color background_color = Color(0xffABC4AA);
+/*  Color background_color = Color(0xffABC4AA);
+  Color title_color = Colors.black;
+
+  Color spinwheel_border_color = Colors.white;
   Color odd_spinwheel_color = Color(0xffF3DEBA);
   Color even_spinwheel_color = Color(0xffA9907E);
+  Color special_spinwheel_color = Colors.black54;
+
   Color back_button_color = Color(0xffA9907E);
-  Color spin_button_color = Color(0xff675D50);
+  Color spin_button_color = Color(0xff675D50);*/
+
+/*
+  Color background_color = Color(0xffF0ECCF);
+  Color title_color = Colors.black;
+
   Color spinwheel_border_color = Colors.white;
+  Color odd_spinwheel_color = Color(0xffFBC252);
+  Color even_spinwheel_color = Color(0xff7AA874);
+  Color special_spinwheel_color = Colors.black54;
+
+  Color back_button_color = Color(0xffFFB100);
+  Color spin_button_color = Color(0xff7AA874);
+*/
 
   @override
   void dispose() {
     selected.close();
     super.dispose();
   }
+
   @override
   Widget build(BuildContext context) {
     return Scaffold(
@@ -45,6 +75,11 @@ class _SpinWheel2State extends State<SpinWheel2> {
           crossAxisAlignment: CrossAxisAlignment.center,
           mainAxisAlignment: MainAxisAlignment.center,
           children: [
+            Text('กินไรดี',
+              style: GoogleFonts.prompt(
+                  fontWeight: FontWeight.bold, fontSize: 50.0, color: title_color),
+            ),
+            Padding(padding: EdgeInsets.only(top: 50)),
             StreamBuilder(
               stream: selected.stream,
               builder: (context, snapshot) => snapshot.hasData
@@ -68,12 +103,12 @@ class _SpinWheel2State extends State<SpinWheel2> {
                 items: [
                   for (int i = 0; i < value.length; i++)...<FortuneItem>[
                     FortuneItem(
-                        child: Text(value[i],
-                            style: const TextStyle(
+                        child: Text('  ' + value[i],
+                            style: GoogleFonts.prompt(
                                 fontSize: 25,
-                                fontWeight: FontWeight.bold)),
+                            )),
                         style: FortuneItemStyle(
-                          color: i % 2 == 0 ? odd_spinwheel_color : even_spinwheel_color, // <-- Set color based on odd/even
+                          color: i % 2 == 1 ? odd_spinwheel_color : (i == 0 ? special_spinwheel_color : even_spinwheel_color), // <-- Set color based on odd/even
                           borderColor: spinwheel_border_color, // <-- Wheel border color
                           borderWidth: 3, // <-- Wheel border width
                         )
@@ -168,27 +203,44 @@ class _SpinWheel2State extends State<SpinWheel2> {
 class ResultScreen extends StatelessWidget {
   final String result;
 
+  //test color
+  Color background_color = Color(0xffABC4AA);
+  Color back_button_color = Color(0xffA9907E);
+  Color home_button_color = Color(0xff675D50);
+  Color result_text_color = Colors.black;
+  Color title_text_color = Colors.white;
+
   ResultScreen({required this.result});
 
   @override
   Widget build(BuildContext context) {
     return Scaffold(
+      backgroundColor: background_color,
       body: Center(
         child: Column(
           mainAxisAlignment: MainAxisAlignment.center,
           children: [
             SizedBox(
               height: 150,
-              child: Image.asset('images/icons8-noodles-96.png'),
+              child: Image.network('https://cdn-icons-png.flaticon.com/512/1933/1933833.png',
+                  width: 150, height: 100),
             ),
+            Padding(padding: EdgeInsets.only(top: 10)),
             Text("วันนี้ไปกินนน!!",
-              style: GoogleFonts.prompt(fontSize: 30),
+              style: GoogleFonts.prompt(
+                  fontSize: 36,
+                  color: title_text_color,
+              ),
             ),
-            Padding(padding: EdgeInsets.only(top: 30)),
+            Padding(padding: EdgeInsets.only(top: 10)),
             Text(result,
-              style: GoogleFonts.prompt(fontSize: 42, color: Colors.green, fontWeight: FontWeight.bold),
+              style: GoogleFonts.prompt(
+                  fontSize: 42,
+                  color: result_text_color,
+                  fontWeight: FontWeight.bold,
+              ),
             ),
-            Padding(padding: EdgeInsets.only(top: 30)),
+            Padding(padding: EdgeInsets.only(top: 50)),
             Row(
               mainAxisAlignment: MainAxisAlignment.center,
               children: [
@@ -201,7 +253,7 @@ class ResultScreen extends StatelessWidget {
                       },
                       child: Text('สุ่มใหม่', style: GoogleFonts.prompt(fontSize: 18)),
                       style: ElevatedButton.styleFrom(
-                        backgroundColor: Colors.green,
+                        backgroundColor: back_button_color,
                       ),
                     )
                 ),
@@ -215,7 +267,7 @@ class ResultScreen extends StatelessWidget {
                     },
                     child: Text('หน้าหลัก', style: GoogleFonts.prompt(fontSize: 18)),
                     style: ElevatedButton.styleFrom(
-                        backgroundColor: Colors.green,
+                        backgroundColor: home_button_color,
                     ),
                   )
                 ),
