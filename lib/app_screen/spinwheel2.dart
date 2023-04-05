@@ -36,10 +36,10 @@ class _SpinWheel2State extends State<SpinWheel2> {
           mainAxisAlignment: MainAxisAlignment.center,
           children: [
             StreamBuilder(
-            stream: selected.stream,
-            builder: (context, snapshot) => snapshot.hasData
-                ? _text(snapshot)
-                : Container(),
+              stream: selected.stream,
+              builder: (context, snapshot) => snapshot.hasData
+                  ? _text(snapshot)
+                  : Container(),
             ),
             SizedBox(
               height: 300,
@@ -50,25 +50,25 @@ class _SpinWheel2State extends State<SpinWheel2> {
                   duration: Duration(seconds: 1),
                   curve: Curves.decelerate,
                 ),
-                  onFling: () {
-                    selected.add(Fortune.randomInt(0, value.length));
-                  },
+                onFling: () {
+                  selected.add(Fortune.randomInt(0, value.length));
+                },
                 onAnimationStart: () {
                 },
                 items: [
-                  for (int i = 0; i < value.length; i++)...<FortuneItem>{
+                  for (int i = 0; i < value.length; i++)...<FortuneItem>[
                     FortuneItem(
                         child: Text(value[i],
                             style: const TextStyle(
                                 fontSize: 25,
                                 fontWeight: FontWeight.bold)),
                         style: FortuneItemStyle(
-                          color: Colors.primaries[_random.nextInt(Colors.primaries.length)], // <-- Wheel color
+                          color: i % 2 == 0 ? Colors.green : Colors.blue, // <-- Set color based on odd/even
                           borderColor: Colors.white, // <-- Wheel border color
                           borderWidth: 3, // <-- Wheel border width
                         )
                     )
-                  }
+                  ]
                 ],
                 onAnimationEnd: () {
                   setState(() {
@@ -80,7 +80,15 @@ class _SpinWheel2State extends State<SpinWheel2> {
                     );
                   });
                   ScaffoldMessenger.of(context).showSnackBar(
-                    SnackBar(content: Text('วันนี้เราจะไปกิน!!! ${result}'))
+                      SnackBar(content: Text('วันนี้เราจะไปกิน!!! ${result}'))
+                  );
+                  Navigator.push(
+                    context,
+                    MaterialPageRoute(
+                      builder: (context) => ResultScreen(
+                        result: result,
+                      ),
+                    ),
                   );
                 },
                 indicators: const <FortuneIndicator>[
@@ -105,12 +113,12 @@ class _SpinWheel2State extends State<SpinWheel2> {
                 color: Colors.yellow,
                 child: Center(
                   child: Text("หมุน",
-                    style: TextStyle(
-                      color: Colors.blue,
-                      fontWeight: FontWeight.bold,
-                      fontSize: 40,
+                      style: TextStyle(
+                        color: Colors.blue,
+                        fontWeight: FontWeight.bold,
+                        fontSize: 40,
                       )
-                    ),
+                  ),
                 ),
               ),
             ),
@@ -125,5 +133,49 @@ class _SpinWheel2State extends State<SpinWheel2> {
     result = value[val];
 
     return SizedBox();
+  }
+}
+
+class ResultScreen extends StatelessWidget {
+  final String result;
+
+  ResultScreen({required this.result});
+
+  @override
+  Widget build(BuildContext context) {
+    return Scaffold(
+      body: Center(
+        child: Column(
+          mainAxisAlignment: MainAxisAlignment.center,
+          children: [
+            Text("วันนี้ไปกินนน!!",
+              style: TextStyle(fontSize: 36),
+            ),
+            Padding(padding: EdgeInsets.only(top: 30)),
+            Text(result,
+              style: TextStyle(fontSize: 36),
+            ),
+            Padding(padding: EdgeInsets.only(top: 30)),
+            Row(
+              mainAxisAlignment: MainAxisAlignment.center,
+              children: [
+                ElevatedButton(
+                  onPressed: () {
+                    Navigator.pop(context);
+                  },
+                  child: Text('Again'),
+                ),
+                Padding(padding: EdgeInsets.only(right: 50)),
+                ElevatedButton(
+                  onPressed: () {
+                    Navigator.pop(context);
+                  },
+                  child: Text('Home'),
+                )
+              ],
+            )
+        ])
+      ),
+    );
   }
 }
