@@ -20,24 +20,8 @@ class MyApp extends StatelessWidget {
         '/home': (context) => const HomePage(),
         '/eat': (context) => const ListViewFood(),
         '/calculate': (context) => Calculator(),
-        '/foodRecommend': (context) => const FoodRecommendApp(),
+        '/foodRecommend': (context) => const FoodRecommend(),
       },
-    );
-  }
-}
-
-class CalculatePage extends StatelessWidget {
-  const CalculatePage({super.key});
-
-  @override
-  Widget build(BuildContext context) {
-    return const Scaffold(
-      body: Center(
-        child: Text(
-          'หารค่าอาหาร',
-          style: TextStyle(fontSize: 24),
-        ),
-      ),
     );
   }
 }
