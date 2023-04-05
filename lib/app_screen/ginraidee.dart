@@ -32,168 +32,172 @@ class _ListViewFoodState extends State<ListViewFood> {
   Widget build(BuildContext context) {
     entries.sort();
 
-    return Material(
-        color: background_color,
-        child: Column(
-        mainAxisAlignment: MainAxisAlignment.spaceEvenly,
-        children: [
-          const Padding(padding: EdgeInsets.only(top: 5)),
-          Text(
-            'กินอะไรดี',
-            style: GoogleFonts.prompt(
-                fontWeight: FontWeight.bold, fontSize: 50.0, color: title_text_color),
-          ),
-          Container(
-            margin: const EdgeInsets.only(
-                left: 50.0, top: 10.0, right: 50.0, bottom: 10.0),
-            decoration: BoxDecoration(
-              boxShadow: const [
-                BoxShadow(
-                    color: Colors.black38, blurRadius: 5, offset: Offset(0, 5))
-              ],
-              color: Colors.white,
-              borderRadius: BorderRadius.circular(10.0),
+    return Scaffold(
+        backgroundColor: background_color,
+        appBar: AppBar(
+          backgroundColor: Colors.transparent,
+          elevation: 0,
+          leading: IconButton(
+            icon: const Icon(
+              Icons.arrow_back,
+              color: Colors.black,
+              size: 40,
             ),
-            child: Center(
-              child: TextField(
-                controller: textController,
-                style: const TextStyle(fontSize: 25),
-                textAlign: TextAlign.center,
-                decoration: InputDecoration(
-                    hintText: 'เพิ่มเมนูตรงนี้',
-                    hintStyle: GoogleFonts.prompt(),
-                    border: InputBorder.none,
-                    suffixIcon: IconButton(
-                      onPressed: () {
-                        setState(() {
-                          if (textController.text.isNotEmpty) {
-                            entries.add(textController.text);
-                            textController.clear();
-                          } else {
-                            //do nothing
-                          }
-                        });
-                      },
-                      icon: const Icon(Icons.add, size: 30),
-                    )),
-              ),
+            onPressed: () => Navigator.pop(context),
+          ),
+        ),
+        body: Column(
+          mainAxisAlignment: MainAxisAlignment.spaceEvenly,
+          children: [
+            Text(
+              'กินอะไรดี',
+              style: GoogleFonts.prompt(
+                  fontWeight: FontWeight.bold,
+                  fontSize: 50.0,
+                  color: title_text_color),
             ),
-          ),
-          Text(
-            'ปล. โปรดเพิ่มรายการอย่างน้อย 2 รายการ',
-            style:
-                GoogleFonts.prompt(fontWeight: FontWeight.bold, fontSize: 20.0),
-          ),
-          Container(
+            Container(
               margin: const EdgeInsets.only(
-                left: 30.0,
-                right: 30.0,
+                  left: 50.0, top: 10.0, right: 50.0, bottom: 10.0),
+              decoration: BoxDecoration(
+                boxShadow: const [
+                  BoxShadow(
+                      color: Colors.black38,
+                      blurRadius: 5,
+                      offset: Offset(0, 5))
+                ],
+                color: Colors.white,
+                borderRadius: BorderRadius.circular(10.0),
               ),
-              height: 200.0,
-              decoration: BoxDecoration(boxShadow: const [
-                BoxShadow(
-                    color: Colors.black38, blurRadius: 5, offset: Offset(0, 5))
-              ], borderRadius: BorderRadius.circular(10.0), color: Colors.white),
-              child: entries.isNotEmpty
-                  ? Scrollbar(
-                      child: ListView.separated(
-                      padding: const EdgeInsets.only(top: 10.0, bottom: 10),
-                      itemCount: entries.length,
-                      itemBuilder: (context, index) {
-                        return ListTile(
-                          leading: IconButton(
-                              onPressed: () {
-                                setState(() {
-                                  entries.removeAt(index);
-                                });
-                              },
-                              icon: const Icon(
-                                Icons.remove_circle,
-                                color: Colors.redAccent,
-                                size: 30,
-                              )),
-                          title: Text(
-                            // ignore: unnecessary_string_interpolations
-                            '${entries[index]}',
-                            style: GoogleFonts.prompt(fontSize: 24.0),
-                          ),
-                        );
-                      },
-                      separatorBuilder: (BuildContext context, int index) =>
-                          const Divider(
-                        color: Colors.black26,
-                      ),
-                    ))
-                  : Center(
-                      child: Text(
-                        'No food in your list',
-                        style: GoogleFonts.prompt(
-                            fontSize: 30, color: Colors.black26),
-                      ),
-                    )),
-          Visibility(
-            visible: entries.length >= 2,
-            child: SizedBox(
+              child: Center(
+                child: TextField(
+                  controller: textController,
+                  style: const TextStyle(fontSize: 25),
+                  textAlign: TextAlign.center,
+                  decoration: InputDecoration(
+                      hintText: 'เพิ่มเมนูตรงนี้',
+                      hintStyle: GoogleFonts.prompt(),
+                      border: InputBorder.none,
+                      suffixIcon: IconButton(
+                        onPressed: () {
+                          setState(() {
+                            if (textController.text.isNotEmpty) {
+                              entries.add(textController.text);
+                              textController.clear();
+                            } else {
+                              //do nothing
+                            }
+                          });
+                        },
+                        icon: const Icon(Icons.add, size: 30),
+                      )),
+                ),
+              ),
+            ),
+            Text(
+              'ปล. โปรดเพิ่มรายการอย่างน้อย 2 รายการ',
+              style: GoogleFonts.prompt(
+                  fontWeight: FontWeight.bold, fontSize: 20.0),
+            ),
+            Container(
+                margin: const EdgeInsets.only(
+                  left: 30.0,
+                  right: 30.0,
+                ),
+                height: 200.0,
+                decoration: BoxDecoration(
+                    boxShadow: const [
+                      BoxShadow(
+                          color: Colors.black38,
+                          blurRadius: 5,
+                          offset: Offset(0, 5))
+                    ],
+                    borderRadius: BorderRadius.circular(10.0),
+                    color: Colors.white),
+                child: entries.isNotEmpty
+                    ? Scrollbar(
+                        child: ListView.separated(
+                        padding: const EdgeInsets.only(top: 10.0, bottom: 10),
+                        itemCount: entries.length,
+                        itemBuilder: (context, index) {
+                          return ListTile(
+                            leading: IconButton(
+                                onPressed: () {
+                                  setState(() {
+                                    entries.removeAt(index);
+                                  });
+                                },
+                                icon: const Icon(
+                                  Icons.remove_circle,
+                                  color: Colors.redAccent,
+                                  size: 30,
+                                )),
+                            title: Text(
+                              // ignore: unnecessary_string_interpolations
+                              '${entries[index]}',
+                              style: GoogleFonts.prompt(fontSize: 24.0),
+                            ),
+                          );
+                        },
+                        separatorBuilder: (BuildContext context, int index) =>
+                            const Divider(
+                          color: Colors.black26,
+                        ),
+                      ))
+                    : Center(
+                        child: Text(
+                          'No food in your list',
+                          style: GoogleFonts.prompt(
+                              fontSize: 30, color: Colors.black26),
+                        ),
+                      )),
+            Visibility(
+              visible: entries.length >= 2,
+              child: SizedBox(
+                width: 300,
+                height: 60,
+                child: MaterialButton(
+                  onPressed: () {
+                    if (entries.isNotEmpty) {
+                      Navigator.of(context).push(MaterialPageRoute(
+                          builder: (context) =>
+                              SelectScreen(entries: entries)));
+                    } else {
+                      //Do nothing //TODO: Can implement something later
+                    }
+                  },
+                  shape: RoundedRectangleBorder(
+                      borderRadius: BorderRadius.circular(30.0)),
+                  color: continue_button_color,
+                  child: Text(
+                    'สุ่มเลย',
+                    style:
+                        GoogleFonts.prompt(fontSize: 25.0, color: Colors.white),
+                  ),
+                ),
+              ),
+            ),
+            SizedBox(
               width: 300,
               height: 60,
               child: MaterialButton(
                 onPressed: () {
-                  if (entries.isNotEmpty) {
-                    Navigator.of(context).push(MaterialPageRoute(
-                        builder: (context) => SelectScreen(entries: entries)));
-                  } else {
-                    //Do nothing //TODO: Can implement something later
-                  }
+                  Navigator.pushNamed(context, '/foodRecommend');
                 },
-                shape: RoundedRectangleBorder(
-                    borderRadius: BorderRadius.circular(30.0)),
-                color: continue_button_color,
+                // ignore: unnecessary_new
+                shape: new RoundedRectangleBorder(
+                    // ignore: unnecessary_new
+                    borderRadius: new BorderRadius.circular(30.0)),
+                color: req_button_color,
                 child: Text(
-                  'สุ่มเลย',
-                  style: GoogleFonts.prompt(fontSize: 25.0, color: Colors.white),
+                  'เมนูแนะนํา',
+                  style:
+                      GoogleFonts.prompt(fontSize: 25.0, color: Colors.white),
                 ),
               ),
             ),
-          ),
-          SizedBox(
-            width: 300,
-            height: 60,
-            child: MaterialButton(
-              onPressed: () {
-                Navigator.pushNamed(context, '/foodRecommend');
-              },
-              // ignore: unnecessary_new
-              shape: new RoundedRectangleBorder(
-                  // ignore: unnecessary_new
-                  borderRadius: new BorderRadius.circular(30.0)),
-              color: req_button_color,
-              child: Text(
-                'เมนูแนะนํา',
-                style: GoogleFonts.prompt(fontSize: 25.0, color: Colors.white),
-              ),
-            ),
-          ),
-          SizedBox(
-            width: 300,
-            height: 60,
-            child: MaterialButton(
-              onPressed: () {
-                Navigator.pushNamed(context, '/home');
-              },
-              // ignore: unnecessary_new
-              shape: new RoundedRectangleBorder(
-                // ignore: unnecessary_new
-                  borderRadius: new BorderRadius.circular(30.0)),
-              color: back_button_color,
-              child: Text(
-                'กลับ',
-                style: GoogleFonts.prompt(fontSize: 25.0, color: Colors.white),
-              ),
-            ),
-          )
-        ],
-      )
-    );
+          ],
+        ));
   }
 }
 
@@ -216,83 +220,76 @@ class SelectScreen extends StatelessWidget {
     return Scaffold(
       backgroundColor: background_color,
       body: Center(
-          child: Column(
-              mainAxisAlignment: MainAxisAlignment.center,
-              children: [
-                Padding(padding: EdgeInsets.only(top: 5)),
-                Text(
-                  'กินอะไรดี',
-                  style: GoogleFonts.prompt(
-                      fontWeight: FontWeight.bold, fontSize: 50.0, color: title_text_color),
-                ),
-                Text(
-                  'เลือกวิธีเลย!',
-                  style: GoogleFonts.prompt(
-                      fontWeight: FontWeight.bold, fontSize: 50.0, color: title_text_color),
-                ),
-                Padding(padding: EdgeInsets.only(top: 55)),
-                SizedBox(
-                    width: 300,
-                    height: 70,
-                    child: ElevatedButton(
-                      onPressed: () {
-                        if (entries.isNotEmpty) {
-                          Navigator.of(context).push(MaterialPageRoute(
-                              builder: (context) => SpinWheel2(value: entries)));
-                        } else {
-                          //Do nothing //TODO: Can implement something later
-                        }
-                      },
-                      child: Text('กงล้อหมุน',
-                          style: GoogleFonts.prompt(
-                              fontSize: 24,
-                              color: Colors.white)),
-                      style: ElevatedButton.styleFrom(
-                        backgroundColor: button1_color,
-                      ),
-                    )
-                ),
-                Padding(padding: EdgeInsets.only(top: 25)),
-                SizedBox(
-                    width: 300,
-                    height: 70,
-                    child: ElevatedButton(
-                      onPressed: () {
-                        if (entries.isNotEmpty) {
-                          Navigator.of(context).push(MaterialPageRoute(
-                              builder: (context) => ScratcherScreen(result: entries[random.nextInt(entries.length)])));
-                        } else {
-                          //Do nothing //TODO: Can implement something later
-                        }
-                      },
-                      child: Text('ขูดหวย',
-                          style: GoogleFonts.prompt(
-                              fontSize: 24,
-                              color: Colors.white)),
-                      style: ElevatedButton.styleFrom(
-                        backgroundColor: button1_color,
-                      ),
-                    )
-                ),
-                Padding(padding: EdgeInsets.only(top: 25)),
-                SizedBox(
-                    width: 300,
-                    height: 70,
-                    child: ElevatedButton(
-                      onPressed: () {
-                        Navigator.pop(context);
-                      },
-                      child: Text('กลับ',
-                          style: GoogleFonts.prompt(
-                              fontSize: 24,
-                              color: Colors.white)),
-                      style: ElevatedButton.styleFrom(
-                        backgroundColor: button2_color,
-                      ),
-                    )
-                ),
-              ])
-      ),
+          child: Column(mainAxisAlignment: MainAxisAlignment.center, children: [
+        Padding(padding: EdgeInsets.only(top: 5)),
+        Text(
+          'กินอะไรดี',
+          style: GoogleFonts.prompt(
+              fontWeight: FontWeight.bold,
+              fontSize: 50.0,
+              color: title_text_color),
+        ),
+        Text(
+          'เลือกวิธีเลย!',
+          style: GoogleFonts.prompt(
+              fontWeight: FontWeight.bold,
+              fontSize: 50.0,
+              color: title_text_color),
+        ),
+        Padding(padding: EdgeInsets.only(top: 55)),
+        SizedBox(
+            width: 300,
+            height: 70,
+            child: ElevatedButton(
+              onPressed: () {
+                if (entries.isNotEmpty) {
+                  Navigator.of(context).push(MaterialPageRoute(
+                      builder: (context) => SpinWheel2(value: entries)));
+                } else {
+                  //Do nothing //TODO: Can implement something later
+                }
+              },
+              child: Text('กงล้อหมุน',
+                  style: GoogleFonts.prompt(fontSize: 24, color: Colors.white)),
+              style: ElevatedButton.styleFrom(
+                backgroundColor: button1_color,
+              ),
+            )),
+        Padding(padding: EdgeInsets.only(top: 25)),
+        SizedBox(
+            width: 300,
+            height: 70,
+            child: ElevatedButton(
+              onPressed: () {
+                if (entries.isNotEmpty) {
+                  Navigator.of(context).push(MaterialPageRoute(
+                      builder: (context) => ScratcherScreen(
+                          result: entries[random.nextInt(entries.length)])));
+                } else {
+                  //Do nothing //TODO: Can implement something later
+                }
+              },
+              child: Text('ขูดหวย',
+                  style: GoogleFonts.prompt(fontSize: 24, color: Colors.white)),
+              style: ElevatedButton.styleFrom(
+                backgroundColor: button1_color,
+              ),
+            )),
+        Padding(padding: EdgeInsets.only(top: 25)),
+        SizedBox(
+            width: 300,
+            height: 70,
+            child: ElevatedButton(
+              onPressed: () {
+                Navigator.pop(context);
+              },
+              child: Text('กลับ',
+                  style: GoogleFonts.prompt(fontSize: 24, color: Colors.white)),
+              style: ElevatedButton.styleFrom(
+                backgroundColor: button2_color,
+              ),
+            )),
+      ])),
     );
   }
 }

@@ -35,7 +35,7 @@ class _FoodRecommendState extends State<FoodRecommend> {
         name: 'บะหมี่กรอบราดหน้ารวมมิตร',
         image: 'บะหมี่กรอบราดหน้ารวมมิตร.jpg'),
     Food(name: 'สุกี้แห้งทะเล', image: 'สุกี้แห้งทะเล.jpg'),
-    Food(name: 'ข้าวแกงจืดเต้าหู้หมูสับ', image: 'ข้าวแกงจืดเต้าหู้หมูสับ.jpg'),
+    Food(name: 'ผัดไทยกุ้งสด', image: 'ผัดไทยกุ้งสด.jpg'),
   ];
 
   @override

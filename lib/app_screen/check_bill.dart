@@ -1,13 +1,21 @@
 import 'package:flutter/material.dart';
+import 'package:google_fonts/google_fonts.dart';
 
 class CheckBill extends StatefulWidget {
   final int total_cost;
   final int people_num;
   final int divided_cost;
   final List people_names;
-  CheckBill({Key? key, required this.total_cost, required this.people_num, required this.divided_cost, required this.people_names}): super(key: key);
+  CheckBill(
+      {Key? key,
+      required this.total_cost,
+      required this.people_num,
+      required this.divided_cost,
+      required this.people_names})
+      : super(key: key);
 
-  _CheckBill createState() => _CheckBill(total_cost, people_num, divided_cost, people_names);
+  _CheckBill createState() =>
+      _CheckBill(total_cost, people_num, divided_cost, people_names);
 }
 
 class _CheckBill extends State<CheckBill> {
@@ -15,19 +23,31 @@ class _CheckBill extends State<CheckBill> {
   final int total_cost;
   final int people_num;
   final List people_names;
-  _CheckBill(this.total_cost, this.people_num, this.divided_cost, this.people_names);
+  _CheckBill(
+      this.total_cost, this.people_num, this.divided_cost, this.people_names);
 
   @override
   Widget build(BuildContext context) {
     return Scaffold(
+      appBar: AppBar(
+        backgroundColor: Colors.transparent,
+        elevation: 0,
+        leading: IconButton(
+          icon: const Icon(
+            Icons.arrow_back,
+            color: Colors.black,
+            size: 40,
+          ),
+          onPressed: () => Navigator.pop(context),
+        ),
+      ),
       body: Center(
         child: Column(
           children: [
             Padding(padding: EdgeInsets.all(8)),
-            Text('หารค่าอาหาร', style: TextStyle(
-                fontSize: 35,
-                fontWeight: FontWeight.bold
-            )),
+            Text('หารค่าอาหาร',
+                style: GoogleFonts.prompt(
+                    fontSize: 35, fontWeight: FontWeight.bold)),
             Container(
               width: 300,
               height: 70,
@@ -36,13 +56,10 @@ class _CheckBill extends State<CheckBill> {
                 children: [
                   Align(
                     alignment: Alignment.topLeft,
-                    child: Text('คนละ', style: TextStyle(
-                      fontWeight: FontWeight.bold
-                    )),
+                    child: Text('คนละ',
+                        style: GoogleFonts.prompt(fontWeight: FontWeight.bold)),
                   ),
-                  Padding(padding: EdgeInsets.only(
-                    left: 15
-                  )),
+                  Padding(padding: EdgeInsets.only(left: 15)),
                   Align(
                     alignment: Alignment.bottomCenter,
                     child: SizedBox(
@@ -52,17 +69,14 @@ class _CheckBill extends State<CheckBill> {
                         readOnly: true,
                         enabled: false,
                         style: TextStyle(
-                            fontSize: 25,
-                            fontWeight: FontWeight.bold
-                        ),
+                            fontSize: 25, fontWeight: FontWeight.bold),
                         textAlign: TextAlign.center,
                         keyboardType: TextInputType.number,
                         decoration: InputDecoration(
                             border: InputBorder.none,
-                            hintText: '$divided_cost', hintStyle: TextStyle(
-                            fontWeight: FontWeight.bold,
-                            fontSize: 40
-                        )),
+                            hintText: '$divided_cost',
+                            hintStyle: GoogleFonts.prompt(
+                                fontWeight: FontWeight.bold, fontSize: 40)),
                       ),
                     ),
                   )
@@ -75,9 +89,8 @@ class _CheckBill extends State<CheckBill> {
               color: Colors.grey[300],
               child: Align(
                 alignment: Alignment.centerRight,
-                child: Text('ค่าใช้จ่ายทั้งหมด $total_cost', style: TextStyle(
-                    fontWeight: FontWeight.bold
-                )),
+                child: Text('ค่าใช้จ่ายทั้งหมด $total_cost',
+                    style: GoogleFonts.prompt(fontWeight: FontWeight.bold)),
               ),
             ),
             Container(
@@ -88,12 +101,15 @@ class _CheckBill extends State<CheckBill> {
                 children: [
                   Align(
                     alignment: Alignment.centerLeft,
-                    child: Text('จํานวณคน $people_num'),
+                    child: Text(
+                      'จํานวณคน $people_num',
+                      style: GoogleFonts.prompt(color: Colors.black),
+                    ),
                   ),
                   Align(
-                    alignment: Alignment.centerRight,
-                    child: Text('ราคาที่ต้องจ่าย'),
-                  )
+                      alignment: Alignment.centerRight,
+                      child: Text('ราคาที่ต้องจ่าย',
+                          style: GoogleFonts.prompt(color: Colors.black)))
                 ],
               ),
             ),
@@ -103,38 +119,31 @@ class _CheckBill extends State<CheckBill> {
                 right: 30.0,
               ),
               width: 300,
-              height: 400.0,
+              height: 350.0,
               child: Scrollbar(
-                child: ListView.separated(
-                    itemCount: people_names.length,
-                    itemBuilder: (context, index) {
-                      return Container(
-                        decoration: BoxDecoration(
-                          color: Colors.grey[300],
-                          border: Border.all(color: Colors.grey[400]!),
-                          borderRadius: BorderRadius.circular(8)
-                        ),
-                        margin: EdgeInsets.symmetric(vertical: 4),
-                        child: ListTile(
-                          leading: Text('${people_names[index]}', style: TextStyle(
-                              fontSize: 20
-                          )),
-                          trailing: Text('$divided_cost', style: TextStyle(
-                              fontSize: 20
-                          )),
-                        )
-                      );
-                    },
-                    separatorBuilder: (BuildContext context, int index) =>
-                    const Divider(
-                      color: Colors.black26,
-                    )
-                )
-              ),
+                  child: ListView.separated(
+                      itemCount: people_names.length,
+                      itemBuilder: (context, index) {
+                        return Container(
+                            decoration: BoxDecoration(
+                                color: Colors.grey[300],
+                                border: Border.all(color: Colors.grey[400]!),
+                                borderRadius: BorderRadius.circular(8)),
+                            margin: EdgeInsets.symmetric(vertical: 4),
+                            child: ListTile(
+                              leading: Text('${people_names[index]}',
+                                  style: GoogleFonts.prompt(fontSize: 20)),
+                              trailing: Text('$divided_cost',
+                                  style: GoogleFonts.prompt(fontSize: 20)),
+                            ));
+                      },
+                      separatorBuilder: (BuildContext context, int index) =>
+                          const Divider(
+                            color: Colors.black26,
+                          ))),
             ),
-            Padding(padding: EdgeInsets.only(
-              bottom: 30,
-            ),
+            Padding(
+              padding: EdgeInsets.only(bottom: 20),
               child: SizedBox(
                 width: 300,
                 height: 60,
@@ -144,12 +153,13 @@ class _CheckBill extends State<CheckBill> {
                   },
                   // ignore: unnecessary_new
                   shape: new RoundedRectangleBorder(
-                    // ignore: unnecessary_new
+                      // ignore: unnecessary_new
                       borderRadius: new BorderRadius.circular(30.0)),
                   color: Colors.green,
                   child: Text(
                     'กลับไปหน้าหลัก',
-                    style: TextStyle(fontSize: 25.0, color: Colors.white),
+                    style:
+                        GoogleFonts.prompt(fontSize: 25.0, color: Colors.white),
                   ),
                 ),
               ),
