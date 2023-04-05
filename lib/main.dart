@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:mobile_app_project/app_screen/calculator_page.dart';
 import 'app_screen/home_page.dart';
 import 'app_screen/ginraidee.dart';
 import 'app_screen/food_recommend.dart';
@@ -18,7 +19,7 @@ class MyApp extends StatelessWidget {
       routes: {
         '/home': (context) => const HomePage(),
         '/eat': (context) => const ListViewFood(),
-        '/calculate': (context) => const CalculatePage(),
+        '/calculate': (context) => Calculator(),
         '/foodRecommend': (context) => const FoodRecommendApp(),
       },
     );
