@@ -1,9 +1,8 @@
 import 'dart:async';
-import 'dart:math';
-
 import 'package:flutter/material.dart';
 import 'package:flutter_fortune_wheel/flutter_fortune_wheel.dart';
 import 'package:google_fonts/google_fonts.dart';
+import 'package:scratcher/scratcher.dart';
 
 class SpinWheel2 extends StatefulWidget {
 
@@ -20,7 +19,6 @@ class _SpinWheel2State extends State<SpinWheel2> {
   List value;
   _SpinWheel2State(this.value);
 
-  final _random = Random();
   var result = '';
 
   //original color
@@ -278,3 +276,4 @@ class ResultScreen extends StatelessWidget {
     );
   }
 }
+

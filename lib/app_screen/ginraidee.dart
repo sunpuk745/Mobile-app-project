@@ -4,7 +4,9 @@ import 'package:google_fonts/google_fonts.dart';
 
 // ignore: unnecessary_import
 import 'package:flutter/cupertino.dart';
+import 'dart:math';
 import 'package:mobile_app_project/app_screen/spinwheel2.dart';
+import 'package:mobile_app_project/app_screen/scratcher.dart';
 
 class ListViewFood extends StatefulWidget {
   const ListViewFood({super.key});
@@ -138,7 +140,7 @@ class _ListViewFoodState extends State<ListViewFood> {
                 onPressed: () {
                   if (entries.isNotEmpty) {
                     Navigator.of(context).push(MaterialPageRoute(
-                        builder: (context) => SpinWheel2(value: entries)));
+                        builder: (context) => SelectScreen(entries: entries)));
                   } else {
                     //Do nothing //TODO: Can implement something later
                   }
@@ -191,6 +193,106 @@ class _ListViewFoodState extends State<ListViewFood> {
           )
         ],
       )
+    );
+  }
+}
+
+class SelectScreen extends StatelessWidget {
+  List<String> entries = [];
+
+  //test color
+  Color background_color = Color(0xffF0ECCF);
+  Color button2_color = Colors.black45;
+  Color button1_color = Color(0xff7AA874);
+
+  Color result_text_color = Color(0xff7AA874);
+  Color title_text_color = Colors.black;
+
+  SelectScreen({required this.entries});
+  Random random = Random();
+
+  @override
+  Widget build(BuildContext context) {
+    return Scaffold(
+      backgroundColor: background_color,
+      body: Center(
+          child: Column(
+              mainAxisAlignment: MainAxisAlignment.center,
+              children: [
+                Padding(padding: EdgeInsets.only(top: 5)),
+                Text(
+                  'กินอะไรดี',
+                  style: GoogleFonts.prompt(
+                      fontWeight: FontWeight.bold, fontSize: 50.0, color: title_text_color),
+                ),
+                Text(
+                  'เลือกวิธีเลย!',
+                  style: GoogleFonts.prompt(
+                      fontWeight: FontWeight.bold, fontSize: 50.0, color: title_text_color),
+                ),
+                Padding(padding: EdgeInsets.only(top: 55)),
+                SizedBox(
+                    width: 300,
+                    height: 70,
+                    child: ElevatedButton(
+                      onPressed: () {
+                        if (entries.isNotEmpty) {
+                          Navigator.of(context).push(MaterialPageRoute(
+                              builder: (context) => SpinWheel2(value: entries)));
+                        } else {
+                          //Do nothing //TODO: Can implement something later
+                        }
+                      },
+                      child: Text('กงล้อหมุน',
+                          style: GoogleFonts.prompt(
+                              fontSize: 24,
+                              color: Colors.white)),
+                      style: ElevatedButton.styleFrom(
+                        backgroundColor: button1_color,
+                      ),
+                    )
+                ),
+                Padding(padding: EdgeInsets.only(top: 25)),
+                SizedBox(
+                    width: 300,
+                    height: 70,
+                    child: ElevatedButton(
+                      onPressed: () {
+                        if (entries.isNotEmpty) {
+                          Navigator.of(context).push(MaterialPageRoute(
+                              builder: (context) => ScratcherScreen(result: entries[random.nextInt(entries.length)])));
+                        } else {
+                          //Do nothing //TODO: Can implement something later
+                        }
+                      },
+                      child: Text('ขูดหวย',
+                          style: GoogleFonts.prompt(
+                              fontSize: 24,
+                              color: Colors.white)),
+                      style: ElevatedButton.styleFrom(
+                        backgroundColor: button1_color,
+                      ),
+                    )
+                ),
+                Padding(padding: EdgeInsets.only(top: 25)),
+                SizedBox(
+                    width: 300,
+                    height: 70,
+                    child: ElevatedButton(
+                      onPressed: () {
+                        Navigator.pop(context);
+                      },
+                      child: Text('กลับ',
+                          style: GoogleFonts.prompt(
+                              fontSize: 24,
+                              color: Colors.white)),
+                      style: ElevatedButton.styleFrom(
+                        backgroundColor: button2_color,
+                      ),
+                    )
+                ),
+              ])
+      ),
     );
   }
 }
