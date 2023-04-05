@@ -1,9 +1,8 @@
 import 'dart:async';
-import 'dart:math';
-
 import 'package:flutter/material.dart';
 import 'package:flutter_fortune_wheel/flutter_fortune_wheel.dart';
 import 'package:google_fonts/google_fonts.dart';
+import 'package:scratcher/scratcher.dart';
 
 class SpinWheel2 extends StatefulWidget {
 
@@ -20,11 +19,10 @@ class _SpinWheel2State extends State<SpinWheel2> {
   List value;
   _SpinWheel2State(this.value);
 
-  final _random = Random();
   var result = '';
 
   //original color
-  Color background_color = Colors.white;
+/*  Color background_color = Colors.white;
   Color title_color = Colors.black;
 
   Color spinwheel_border_color = Colors.white;
@@ -33,7 +31,7 @@ class _SpinWheel2State extends State<SpinWheel2> {
   Color special_spinwheel_color = Colors.black54;
 
   Color back_button_color = Colors.redAccent;
-  Color spin_button_color = Colors.green;
+  Color spin_button_color = Colors.green;*/
 
   //test color
 /*  Color background_color = Color(0xffABC4AA);
@@ -47,7 +45,6 @@ class _SpinWheel2State extends State<SpinWheel2> {
   Color back_button_color = Color(0xffA9907E);
   Color spin_button_color = Color(0xff675D50);*/
 
-/*
   Color background_color = Color(0xffF0ECCF);
   Color title_color = Colors.black;
 
@@ -56,9 +53,8 @@ class _SpinWheel2State extends State<SpinWheel2> {
   Color even_spinwheel_color = Color(0xff7AA874);
   Color special_spinwheel_color = Colors.black54;
 
-  Color back_button_color = Color(0xffFFB100);
+  Color back_button_color = Colors.black45;
   Color spin_button_color = Color(0xff7AA874);
-*/
 
   @override
   void dispose() {
@@ -75,7 +71,7 @@ class _SpinWheel2State extends State<SpinWheel2> {
           crossAxisAlignment: CrossAxisAlignment.center,
           mainAxisAlignment: MainAxisAlignment.center,
           children: [
-            Text('กินไรดี',
+            Text('กินอะไรดี',
               style: GoogleFonts.prompt(
                   fontWeight: FontWeight.bold, fontSize: 50.0, color: title_color),
             ),
@@ -145,30 +141,13 @@ class _SpinWheel2State extends State<SpinWheel2> {
                 ],
               ),
             ),
-            Padding(padding: EdgeInsets.only(top: 50)),
-            Row(
+            Padding(padding: EdgeInsets.only(top: 30)),
+            Column(
               mainAxisAlignment: MainAxisAlignment.center,
               children: [
                 SizedBox(
-                    width: 100,
-                    height: 50,
-                    child: ElevatedButton(
-                      onPressed: () {
-                        Navigator.pop(context);
-                      },
-                      child: Text('ย้อนกลับ',
-                          style: GoogleFonts.prompt(
-                              fontSize: 18,
-                              color: Colors.white)),
-                      style: ElevatedButton.styleFrom(
-                        backgroundColor: back_button_color,
-                      ),
-                    )
-                ),
-                Padding(padding: EdgeInsets.only(right: 50)),
-                SizedBox(
-                    width: 100,
-                    height: 50,
+                    width: 300,
+                    height: 70,
                     child: ElevatedButton(
                       onPressed: () {
                         setState(() {
@@ -177,10 +156,27 @@ class _SpinWheel2State extends State<SpinWheel2> {
                       },
                       child: Text('สุ่มเลย',
                           style: GoogleFonts.prompt(
-                              fontSize: 18,
+                              fontSize: 24,
                               color: Colors.white)),
                       style: ElevatedButton.styleFrom(
                         backgroundColor: spin_button_color,
+                      ),
+                    )
+                ),
+                Padding(padding: EdgeInsets.only(top: 25)),
+                SizedBox(
+                    width: 300,
+                    height: 70,
+                    child: ElevatedButton(
+                      onPressed: () {
+                        Navigator.pop(context);
+                      },
+                      child: Text('กลับ',
+                          style: GoogleFonts.prompt(
+                              fontSize: 24,
+                              color: Colors.white)),
+                      style: ElevatedButton.styleFrom(
+                        backgroundColor: back_button_color,
                       ),
                     )
                 ),
@@ -204,11 +200,12 @@ class ResultScreen extends StatelessWidget {
   final String result;
 
   //test color
-  Color background_color = Color(0xffABC4AA);
-  Color back_button_color = Color(0xffA9907E);
-  Color home_button_color = Color(0xff675D50);
-  Color result_text_color = Colors.black;
-  Color title_text_color = Colors.white;
+  Color background_color = Color(0xffF0ECCF);
+  Color back_button_color = Colors.black45;
+  Color home_button_color = Color(0xff7AA874);
+
+  Color result_text_color = Color(0xff7AA874);
+  Color title_text_color = Colors.black;
 
   ResultScreen({required this.result});
 
@@ -222,7 +219,7 @@ class ResultScreen extends StatelessWidget {
           children: [
             SizedBox(
               height: 150,
-              child: Image.network('https://cdn-icons-png.flaticon.com/512/1933/1933833.png',
+              child: Image.asset('images/1933833.png',
                   width: 150, height: 100),
             ),
             Padding(padding: EdgeInsets.only(top: 10)),
@@ -235,39 +232,40 @@ class ResultScreen extends StatelessWidget {
             Padding(padding: EdgeInsets.only(top: 10)),
             Text(result,
               style: GoogleFonts.prompt(
-                  fontSize: 42,
+                  fontSize: 48,
                   color: result_text_color,
                   fontWeight: FontWeight.bold,
               ),
             ),
             Padding(padding: EdgeInsets.only(top: 50)),
-            Row(
+            Column(
               mainAxisAlignment: MainAxisAlignment.center,
               children: [
                 SizedBox(
-                    width: 100,
-                    height: 50,
+                    width: 300,
+                    height: 70,
                     child: ElevatedButton(
                       onPressed: () {
                         Navigator.pop(context);
                       },
-                      child: Text('สุ่มใหม่', style: GoogleFonts.prompt(fontSize: 18)),
-                      style: ElevatedButton.styleFrom(
-                        backgroundColor: back_button_color,
+                      child: Text('ไม่เอาอ่ะ สุ่มใหม่', style: GoogleFonts.prompt(
+                          fontSize: 25, color: Colors.white)),
+                        style: ElevatedButton.styleFrom(
+                        backgroundColor: home_button_color,
                       ),
                     )
                 ),
-                Padding(padding: EdgeInsets.only(right: 50)),
+                Padding(padding: EdgeInsets.only(top: 30)),
                 SizedBox(
-                  width: 100,
-                  height: 50,
+                  width: 300,
+                  height: 70,
                   child: ElevatedButton(
                     onPressed: () {
                       Navigator.pushNamed(context, '/home');
                     },
-                    child: Text('หน้าหลัก', style: GoogleFonts.prompt(fontSize: 18)),
+                    child: Text('กลับหน้าหลัก', style: GoogleFonts.prompt(fontSize: 25, color: Colors.white)),
                     style: ElevatedButton.styleFrom(
-                        backgroundColor: home_button_color,
+                        backgroundColor: back_button_color,
                     ),
                   )
                 ),
@@ -278,3 +276,4 @@ class ResultScreen extends StatelessWidget {
     );
   }
 }
+
