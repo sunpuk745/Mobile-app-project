@@ -71,6 +71,28 @@ flutter:
     - images/icons8-noodles-48.png
     - images/icons8-noodles-96.png
     - images/1.jpg
+    - images/Logo.png
+    - images/1933833.png
+
+    - images/ข้าวมันไก่.jpg
+    - images/ข้าวผัดกะเพรา.jpg
+    - images/ข้าวผัดกุ้ง.jpg
+    - images/ข้าวผัดพริกแกงหมูกรอบ.jpg
+    - images/กุ้งทอดกระเทียมพริกไทย.jpg
+
+    - images/กล้วยบวชชี.jpg
+    - images/ข้าวเหนียวมะม่วง.jpg
+    - images/ทับทิมกรอบน้ำกะทิ.jpg
+    - images/บัวลอยไข่หวาน.jpg
+    - images/ขนมชั้นดอกกุหลาบ.jpg
+
+    - images/บะหมี่กรอบราดหน้ารวมมิตร.jpg
+    - images/ข้าวไข่ข้น.jpg
+    - images/ผัดซีอิ๊ว.jpg
+    - images/ผัดไทยกุ้งสด.jpg
+    - images/สุกี้แห้งทะเล.jpg
+
+    
 
   # An image asset can refer to one or more resolution-specific "variants", see
   # https://flutter.dev/assets-and-images/#resolution-aware

@@ -20,7 +20,7 @@ class MyApp extends StatelessWidget {
         '/home': (context) => const HomePage(),
         '/eat': (context) => const ListViewFood(),
         '/calculate': (context) => Calculator(),
-        '/foodRecommend': (context) => const FoodRecommendApp(),
+        '/foodRecommend': (context) => const FoodRecommend(),
       },
     );
   }
