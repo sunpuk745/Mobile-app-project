@@ -23,12 +23,19 @@ class _CheckBill extends State<CheckBill> {
   final int total_cost;
   final int people_num;
   final List people_names;
+
+  Color background_color = Color(0xffF0ECCF);
+
+  Color button2_color = Colors.black45;
+  Color button1_color = Color(0xff7AA874);
+
   _CheckBill(
       this.total_cost, this.people_num, this.divided_cost, this.people_names);
 
   @override
   Widget build(BuildContext context) {
     return Scaffold(
+      backgroundColor: background_color,
         appBar: AppBar(
           backgroundColor: Colors.transparent,
           elevation: 0,
@@ -51,7 +58,7 @@ class _CheckBill extends State<CheckBill> {
                 Container(
                   width: 300,
                   height: 70,
-                  color: Colors.grey[300],
+                  color: Colors.white,
                   child: Row(
                     children: [
                       Align(
@@ -70,14 +77,14 @@ class _CheckBill extends State<CheckBill> {
                             readOnly: true,
                             enabled: false,
                             style: TextStyle(
-                                fontSize: 25, fontWeight: FontWeight.bold),
+                                fontSize: 25, fontWeight: FontWeight.bold,),
                             textAlign: TextAlign.center,
                             keyboardType: TextInputType.number,
                             decoration: InputDecoration(
                                 border: InputBorder.none,
                                 hintText: '$divided_cost',
                                 hintStyle: GoogleFonts.prompt(
-                                    fontWeight: FontWeight.bold, fontSize: 40)),
+                                    fontWeight: FontWeight.bold, fontSize: 40, color: button1_color)),
                           ),
                         ),
                       )
@@ -87,7 +94,7 @@ class _CheckBill extends State<CheckBill> {
                 Container(
                   width: 300,
                   height: 30,
-                  color: Colors.grey[300],
+                  color: Colors.white,
                   child: Align(
                     alignment: Alignment.centerRight,
                     child: Text('ค่าใช้จ่ายทั้งหมด $total_cost',
@@ -127,7 +134,7 @@ class _CheckBill extends State<CheckBill> {
                           itemBuilder: (context, index) {
                             return Container(
                                 decoration: BoxDecoration(
-                                    color: Colors.grey[300],
+                                    color: Colors.white,
                                     border:
                                         Border.all(color: Colors.grey[400]!),
                                     borderRadius: BorderRadius.circular(8)),
@@ -157,7 +164,7 @@ class _CheckBill extends State<CheckBill> {
                       shape: new RoundedRectangleBorder(
                           // ignore: unnecessary_new
                           borderRadius: new BorderRadius.circular(30.0)),
-                      color: Colors.green,
+                      color: button1_color,
                       child: Text(
                         'กลับไปหน้าหลัก',
                         style: GoogleFonts.prompt(

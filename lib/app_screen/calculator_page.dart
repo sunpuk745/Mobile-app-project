@@ -17,6 +17,11 @@ class _Calculator extends State<Calculator> {
   int _divided_cost = 0;
   final List<TextEditingController> _controllers = [];
 
+  Color background_color = Color(0xffF0ECCF);
+
+  Color button2_color = Colors.black45;
+  Color button1_color = Color(0xff7AA874);
+
   void _initializeControllers() {
     _controllers.clear();
     for (int i = 0; i < _people_num; i++) {
@@ -84,7 +89,7 @@ class _Calculator extends State<Calculator> {
                 TextField(
                   controller: _controllers[i],
                   decoration: InputDecoration(
-                      labelText: 'คนที่ ${i + 1}',
+                      labelText: 'ชื่อคนที่ ${i + 1}',
                       labelStyle: GoogleFonts.prompt(color: Colors.black)),
                 ),
             ],
@@ -114,6 +119,9 @@ class _Calculator extends State<Calculator> {
                       divided_cost: _divided_cost,
                       people_names: inputValues)));
             },
+            style: ElevatedButton.styleFrom(
+              backgroundColor: button1_color,
+            ),
             child: Text(
               'ยืนยัน',
               style: GoogleFonts.prompt(
@@ -129,6 +137,7 @@ class _Calculator extends State<Calculator> {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
+      backgroundColor: background_color,
         appBar: AppBar(
           backgroundColor: Colors.transparent,
           elevation: 0,
@@ -150,7 +159,7 @@ class _Calculator extends State<Calculator> {
               Container(
                 width: 300,
                 height: 100,
-                color: Colors.grey[300],
+                color: Colors.white,
                 child: Column(
                   children: [
                     Align(
@@ -236,22 +245,22 @@ class _Calculator extends State<Calculator> {
                       NumpadBtn(
                           handlePress: _handlePress,
                           text: '1',
-                          backgroundColor: Colors.green,
-                          borderColor: Colors.green,
+                          backgroundColor: button1_color,
+                          borderColor: button1_color,
                           borderWidth: 10,
                           fontSize: 24),
                       NumpadBtn(
                           handlePress: _handlePress,
                           text: '2',
-                          backgroundColor: Colors.green,
-                          borderColor: Colors.green,
+                          backgroundColor: button1_color,
+                          borderColor: button1_color,
                           borderWidth: 10,
                           fontSize: 24),
                       NumpadBtn(
                           handlePress: _handlePress,
                           text: '3',
-                          backgroundColor: Colors.green,
-                          borderColor: Colors.green,
+                          backgroundColor: button1_color,
+                          borderColor: button1_color,
                           borderWidth: 10,
                           fontSize: 24),
                     ],
@@ -262,22 +271,22 @@ class _Calculator extends State<Calculator> {
                       NumpadBtn(
                           handlePress: _handlePress,
                           text: '4',
-                          backgroundColor: Colors.green,
-                          borderColor: Colors.green,
+                          backgroundColor: button1_color,
+                          borderColor: button1_color,
                           borderWidth: 10,
                           fontSize: 24),
                       NumpadBtn(
                           handlePress: _handlePress,
                           text: '5',
-                          backgroundColor: Colors.green,
-                          borderColor: Colors.green,
+                          backgroundColor: button1_color,
+                          borderColor: button1_color,
                           borderWidth: 10,
                           fontSize: 24),
                       NumpadBtn(
                           handlePress: _handlePress,
                           text: '6',
-                          backgroundColor: Colors.green,
-                          borderColor: Colors.green,
+                          backgroundColor: button1_color,
+                          borderColor: button1_color,
                           borderWidth: 10,
                           fontSize: 24),
                     ],
@@ -288,22 +297,22 @@ class _Calculator extends State<Calculator> {
                       NumpadBtn(
                           handlePress: _handlePress,
                           text: '7',
-                          backgroundColor: Colors.green,
-                          borderColor: Colors.green,
+                          backgroundColor: button1_color,
+                          borderColor: button1_color,
                           borderWidth: 10,
                           fontSize: 24),
                       NumpadBtn(
                           handlePress: _handlePress,
                           text: '8',
-                          backgroundColor: Colors.green,
-                          borderColor: Colors.green,
+                          backgroundColor: button1_color,
+                          borderColor: button1_color,
                           borderWidth: 10,
                           fontSize: 24),
                       NumpadBtn(
                           handlePress: _handlePress,
                           text: '9',
-                          backgroundColor: Colors.green,
-                          borderColor: Colors.green,
+                          backgroundColor: button1_color,
+                          borderColor: button1_color,
                           borderWidth: 10,
                           fontSize: 24),
                     ],
@@ -318,10 +327,10 @@ class _Calculator extends State<Calculator> {
                         child: Container(
                             padding: EdgeInsets.all(10),
                             decoration: BoxDecoration(
-                              color: Colors.green,
+                              color: button1_color,
                               shape: BoxShape.circle,
                               border:
-                                  Border.all(color: Colors.green, width: 10),
+                                  Border.all(color: button1_color, width: 10),
                             ),
                             child: Transform.scale(
                                 scale: 1, child: Icon(Icons.backspace))),
@@ -329,8 +338,8 @@ class _Calculator extends State<Calculator> {
                       NumpadBtn(
                           handlePress: _handlePress,
                           text: '0',
-                          backgroundColor: Colors.green,
-                          borderColor: Colors.green,
+                          backgroundColor: button1_color,
+                          borderColor: button1_color,
                           borderWidth: 10,
                           fontSize: 24),
                       GestureDetector(
@@ -340,10 +349,10 @@ class _Calculator extends State<Calculator> {
                         child: Container(
                             padding: EdgeInsets.all(10),
                             decoration: BoxDecoration(
-                              color: Colors.green,
+                              color: button1_color,
                               shape: BoxShape.circle,
                               border:
-                                  Border.all(color: Colors.green, width: 10),
+                                  Border.all(color: button1_color, width: 10),
                             ),
                             child: Transform.scale(
                                 scale: 2, child: Icon(Icons.chevron_right))),
@@ -364,7 +373,7 @@ class _Calculator extends State<Calculator> {
                   },
                   shape: new RoundedRectangleBorder(
                       borderRadius: new BorderRadius.circular(30.0)),
-                  color: Colors.green,
+                  color: button1_color,
                   child: Text(
                     'กดหารเลย',
                     style:

@@ -36,7 +36,7 @@ class ScratcherScreen extends StatelessWidget {
 
                 return Scratcher(
                   accuracy: ScratchAccuracy.low,
-                  threshold: 25,
+                  threshold: 15,
                   brushSize: 50,
                   onThreshold: () {
                     setState(() {
@@ -45,7 +45,7 @@ class ScratcherScreen extends StatelessWidget {
                   },
                   image: Image.asset('images/1933833.png', width: 150, height: 150,),
                   child: AnimatedOpacity(
-                    duration: Duration(milliseconds: 100),
+                    duration: Duration(milliseconds: 250),
                     opacity: _opacity,
                     child: Container(
                       height: 300,
