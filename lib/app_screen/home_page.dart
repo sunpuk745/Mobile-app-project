@@ -12,61 +12,72 @@ class HomePage extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-      backgroundColor: background_color,
-      body: Center(
-        child: Column(
-          mainAxisAlignment: MainAxisAlignment.center,
-          children: [
-                  Image.asset('images/Logo.png', width: 250, height: 250,),
-                  Image.asset('images/1933833.png', width: 150, height: 150,),
-                  Padding(padding: EdgeInsets.only(top: 50)),
-                  SizedBox(
-                    width: 300,
-                    height: 70,
-                    child: ElevatedButton(
-                      onPressed: () {
-                        Navigator.pushNamed(context, '/eat');
-                      },
-                      style: ButtonStyle(
-                        backgroundColor: MaterialStateProperty.all<Color>(button_color),
-                        shape: MaterialStateProperty.all<RoundedRectangleBorder>(
-                          RoundedRectangleBorder(
-                            borderRadius: BorderRadius.circular(15),
-                          ),
-                        ),
-                      ),
-                      child: Text(
-                        'กินอะไรดี',
-                        style: GoogleFonts.prompt(fontSize: 25),
-                      ),
-                    ),
-                  ),
-                  const SizedBox(height: 16),
-                  SizedBox(
-                    width: 300,
-                    height: 70,
-                    child: ElevatedButton(
-                      onPressed: () {
-                        Navigator.pushNamed(context, '/calculate');
-                      },
-                      style: ButtonStyle(
-                        backgroundColor: MaterialStateProperty.all<Color>(button_color),
-                        shape: MaterialStateProperty.all<RoundedRectangleBorder>(
-                          RoundedRectangleBorder(
-                            borderRadius: BorderRadius.circular(15),
-                          ),
-                        ),
-                      ),
-                      child: Text(
-                        'หารค่าอาหาร',
-                        style: GoogleFonts.prompt(fontSize: 25),
-                      ),
-                    ),
-                  ),
-                  Padding(padding: EdgeInsets.only(top: 80)),
-                ],
+        backgroundColor: background_color,
+        body: SingleChildScrollView(
+            child: Center(
+          child: Column(
+            mainAxisAlignment: MainAxisAlignment.center,
+            children: [
+              SizedBox(height: 50),
+              Image.asset(
+                'images/Logo.png',
+                width: 250,
+                height: 250,
               ),
-            )
-          );
+              Image.asset(
+                'images/1933833.png',
+                width: 150,
+                height: 150,
+              ),
+              Padding(padding: EdgeInsets.only(top: 30)),
+              SizedBox(
+                width: 300,
+                height: 70,
+                child: ElevatedButton(
+                  onPressed: () {
+                    Navigator.pushNamed(context, '/eat');
+                  },
+                  style: ButtonStyle(
+                    backgroundColor:
+                        MaterialStateProperty.all<Color>(button_color),
+                    shape: MaterialStateProperty.all<RoundedRectangleBorder>(
+                      RoundedRectangleBorder(
+                        borderRadius: BorderRadius.circular(15),
+                      ),
+                    ),
+                  ),
+                  child: Text(
+                    'กินอะไรดี',
+                    style: GoogleFonts.prompt(fontSize: 25),
+                  ),
+                ),
+              ),
+              const SizedBox(height: 16),
+              SizedBox(
+                width: 300,
+                height: 70,
+                child: ElevatedButton(
+                  onPressed: () {
+                    Navigator.pushNamed(context, '/calculate');
+                  },
+                  style: ButtonStyle(
+                    backgroundColor:
+                        MaterialStateProperty.all<Color>(button_color),
+                    shape: MaterialStateProperty.all<RoundedRectangleBorder>(
+                      RoundedRectangleBorder(
+                        borderRadius: BorderRadius.circular(15),
+                      ),
+                    ),
+                  ),
+                  child: Text(
+                    'หารค่าอาหาร',
+                    style: GoogleFonts.prompt(fontSize: 25),
+                  ),
+                ),
+              ),
+              Padding(padding: EdgeInsets.only(top: 80)),
+            ],
+          ),
+        )));
   }
 }

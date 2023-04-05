@@ -141,7 +141,7 @@ class _Calculator extends State<Calculator> {
             onPressed: () => Navigator.pop(context),
           ),
         ),
-        body: Center(
+        body: SingleChildScrollView(
           child: Column(
             children: [
               Text('หารค่าอาหาร',
