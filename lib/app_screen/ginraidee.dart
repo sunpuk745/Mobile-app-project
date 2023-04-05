@@ -46,7 +46,8 @@ class _ListViewFoodState extends State<ListViewFood> {
             onPressed: () => Navigator.pop(context),
           ),
         ),
-        body: Column(
+        body: SingleChildScrollView(
+            child: Column(
           mainAxisAlignment: MainAxisAlignment.spaceEvenly,
           children: [
             Text(
@@ -56,9 +57,12 @@ class _ListViewFoodState extends State<ListViewFood> {
                   fontSize: 50.0,
                   color: title_text_color),
             ),
+            SizedBox(
+              height: 20,
+            ),
             Container(
               margin: const EdgeInsets.only(
-                  left: 50.0, top: 10.0, right: 50.0, bottom: 10.0),
+                  left: 50.0, top: 5.0, right: 50.0, bottom: 5.0),
               decoration: BoxDecoration(
                 boxShadow: const [
                   BoxShadow(
@@ -94,10 +98,16 @@ class _ListViewFoodState extends State<ListViewFood> {
                 ),
               ),
             ),
+            SizedBox(
+              height: 15,
+            ),
             Text(
               'ปล. โปรดเพิ่มรายการอย่างน้อย 2 รายการ',
               style: GoogleFonts.prompt(
                   fontWeight: FontWeight.bold, fontSize: 20.0),
+            ),
+            SizedBox(
+              height: 20,
             ),
             Container(
                 margin: const EdgeInsets.only(
@@ -151,6 +161,9 @@ class _ListViewFoodState extends State<ListViewFood> {
                               fontSize: 30, color: Colors.black26),
                         ),
                       )),
+            SizedBox(
+              height: 20,
+            ),
             Visibility(
               visible: entries.length >= 2,
               child: SizedBox(
@@ -178,6 +191,9 @@ class _ListViewFoodState extends State<ListViewFood> {
               ),
             ),
             SizedBox(
+              height: 20,
+            ),
+            SizedBox(
               width: 300,
               height: 60,
               child: MaterialButton(
@@ -197,7 +213,7 @@ class _ListViewFoodState extends State<ListViewFood> {
               ),
             ),
           ],
-        ));
+        )));
   }
 }
 
