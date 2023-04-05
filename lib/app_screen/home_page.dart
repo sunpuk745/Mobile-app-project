@@ -47,7 +47,7 @@ class HomePage extends StatelessWidget {
                     height: 70,
                     child: ElevatedButton(
                       onPressed: () {
-                        Navigator.pushNamed(context, '/calcurate');
+                        Navigator.pushNamed(context, '/calculate');
                       },
                       style: ButtonStyle(
                         backgroundColor: MaterialStateProperty.all<Color>(button_color),

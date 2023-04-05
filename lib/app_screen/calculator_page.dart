@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:mobile_app_project/app_screen/check_bill.dart';
 
 class Calculator extends StatefulWidget {
   Calculator({Key? key}) : super(key: key);
@@ -8,23 +9,35 @@ class Calculator extends StatefulWidget {
 }
 
 class _Calculator extends State<Calculator> {
-  int _people_number = 0;
+  int _people_num = 0;
   TextEditingController _controller = TextEditingController();
   String num = '';
+  int _total_cost = 0;
+  int _divided_cost = 0;
+
+  void _convertStringtoInt() {
+    if (_controller.text.isNotEmpty) {
+      _total_cost = int.parse(_controller.text);
+    }
+  }
+  
+  void _divideCost() {
+    _divided_cost = (_total_cost / _people_num).round();
+  }
 
   void _incrementPeople() {
     setState(() {
-      _people_number++;
+      _people_num++;
     });
   }
 
   void _decrementPeople() {
     setState(() {
-      if (_people_number == 0) {
-        _people_number = 0;
+      if (_people_num == 0) {
+        _people_num = 0;
       }
       else {
-        _people_number--;
+        _people_num--;
       }
     });
   }
@@ -118,7 +131,7 @@ class _Calculator extends State<Calculator> {
                           ),
                           Align(
                             alignment: Alignment.center,
-                            child: Text('$_people_number', style: TextStyle(
+                            child: Text('$_people_num', style: TextStyle(
                                 fontWeight: FontWeight.bold,
                                 fontSize: 60
                             ))
@@ -193,7 +206,7 @@ class _Calculator extends State<Calculator> {
               NumpadBtn(handlePress: _handlePress, text: '0', backgroundColor: Colors.green, borderColor: Colors.green, borderWidth: 10, fontSize: 24),
               GestureDetector(
                 onTap: () {
-                  //TODO Next page
+                  //TODO arrow function
                 },
                 child: Container(
                     padding: EdgeInsets.all(10),
@@ -223,7 +236,12 @@ class _Calculator extends State<Calculator> {
               height: 60,
               child: MaterialButton(
                 onPressed: () {
-                  // TODO
+                  _convertStringtoInt();
+                  _divideCost();
+                  Navigator.of(context).push(
+                      MaterialPageRoute(
+                          builder: (context) => CheckBill(total_cost: _total_cost, people_num: _people_num, divided_cost: _divided_cost,))
+                  );
                 },
                 // ignore: unnecessary_new
                 shape: new RoundedRectangleBorder(

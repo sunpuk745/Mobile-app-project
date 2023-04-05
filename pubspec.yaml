@@ -71,6 +71,8 @@ flutter:
     - images/icons8-noodles-48.png
     - images/icons8-noodles-96.png
     - images/1.jpg
+    - images/1933833.png
+    - images/Logo.png
 
   # An image asset can refer to one or more resolution-specific "variants", see
   # https://flutter.dev/assets-and-images/#resolution-aware
